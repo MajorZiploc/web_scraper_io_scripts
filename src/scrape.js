@@ -4,13 +4,15 @@ const json2csv = require('json2csv');
 const jtu = require('json-test-utility');
 const jr = jtu.jsonRefactor;
 
-function trim(thing) {
-  return typeof thing === 'string'
-    ? thing
-        .trim()
-        .replace(/\s{2,}/g, ' ')
-        .replace(/,/g, ';')
-    : thing;
+function trim(thing, data_format) {
+  var res = thing;
+  if (typeof thing === 'string') {
+    res = thing.trim().replace(/\s{2,}/g, ' ');
+    if (data_format === 'csv') {
+      res = res.replace(/,/g, ';');
+    }
+  }
+  return res;
 }
 
 async function main() {
@@ -23,7 +25,7 @@ async function main() {
   let cleanedData = !Array.isArray(scraped) ? [scraped] : scraped;
   // trim string values
   cleanedData = cleanedData.map(s =>
-    jr.fromKeyValArray(jr.toKeyValArray(s).map(kv => ({ key: kv.key, value: trim(kv.value) })))
+    jr.fromKeyValArray(jr.toKeyValArray(s).map(kv => ({ key: kv.key, value: trim(kv.value, data_format) })))
   );
 
   if (data_format === 'json') {
