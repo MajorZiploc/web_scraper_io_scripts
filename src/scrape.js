@@ -16,32 +16,38 @@ function trim(thing, data_format) {
 }
 
 async function main() {
-  const data_format = process.argv[2];
-  const sitemap = fs.readJSONSync(__dirname + '/sitemap.json');
-
+  const config = await fs.readJSON(process.argv[2]);
+  const sitemap = await fs.readJSON(`${__dirname}/${config.site_map}`);
   const scrapOptions = { delay: 10, pageLoadDelay: 10, browser: 'headless' }; // optional delay, pageLoadDelay and browser
-  const scraped = await webscraper(sitemap, scrapOptions);
-  // ensure that scraped data is an array
-  let cleanedData = !Array.isArray(scraped) ? [scraped] : scraped;
-  // trim string values
-  cleanedData = cleanedData.map(s =>
-    jr.fromKeyValArray(jr.toKeyValArray(s).map(kv => ({ key: kv.key, value: trim(kv.value, data_format) })))
-  );
+  const startUrls = config.start_urls ?? [sitemap.startUrl];
 
-  if (data_format === 'json') {
-    // print scraped data in json format
-    console.log(JSON.stringify(cleanedData, null, 2));
-  }
+  startUrls.forEach(async (startUrl, i) => {
+    sitemap.startUrl = startUrl;
+    const scraped = await webscraper(sitemap, scrapOptions);
+    // ensure that scraped data is an array
+    let cleanedData = !Array.isArray(scraped) ? [scraped] : scraped;
+    // trim string values
+    cleanedData = cleanedData.map(s =>
+      jr.fromKeyValArray(jr.toKeyValArray(s).map(kv => ({ key: kv.key, value: trim(kv.value, config.data_format) })))
+    );
 
-  if (data_format === 'csv') {
-    // quote: '' removes quotes from fields/headers
-    // const parserOptions = { quote: '' }
-    // OR for no customizations
-    const parserOptions = {};
-    const csv = json2csv.parse(cleanedData, parserOptions);
-    // print scraped data in csv format
-    console.log(csv);
-  }
+    var file_content = '<invalid_data_format>';
+    if (config.data_format === 'json') {
+      file_content = JSON.stringify(cleanedData, null, 2);
+    }
+
+    if (config.data_format === 'csv') {
+      // quote: '' removes quotes from fields/headers
+      // const parserOptions = { quote: '' }
+      // OR for no customizations
+      const parserOptions = config.parse_options ?? {};
+      const csv = json2csv.parse(cleanedData, parserOptions);
+      // print scraped data in csv format
+      file_content = csv;
+    }
+    console.log(file_content);
+    fs.writeFile(`${__dirname}/${config.output_file_name_seed}_${i}.${config.data_format}`, file_content);
+  });
 }
 
 main();
