@@ -10,7 +10,7 @@
         "_root"
       ],
       "type": "SelectorLink",
-      "selector": "h3#basic-commands + ul > li a",
+      "selector": "h3 + ul > li a",
       "multiple": true,
       "delay": 0
     },
