@@ -1,0 +1,50 @@
+{
+  "_id": "dotnet-cli-examples",
+  "startUrl": [
+    "https://docs.microsoft.com/en-us/dotnet/core/tools/"
+  ],
+  "selectors": [
+    {
+      "id": "command_link",
+      "parentSelectors": [
+        "_root"
+      ],
+      "type": "SelectorLink",
+      "selector": "h3#basic-commands + ul > li a",
+      "multiple": true,
+      "delay": 0
+    },
+    {
+      "id": "example",
+      "parentSelectors": [
+        "command_link"
+      ],
+      "type": "SelectorElement",
+      "selector": "h2#examples + ul li",
+      "multiple": true,
+      "delay": 0
+    },
+    {
+      "id": "example_description",
+      "parentSelectors": [
+        "example"
+      ],
+      "type": "SelectorText",
+      "selector": "p",
+      "multiple": false,
+      "delay": 0,
+      "regex": ""
+    },
+    {
+      "id": "example_command",
+      "parentSelectors": [
+        "example"
+      ],
+      "type": "SelectorText",
+      "selector": "pre code",
+      "multiple": false,
+      "delay": 0,
+      "regex": ""
+    }
+  ]
+}
