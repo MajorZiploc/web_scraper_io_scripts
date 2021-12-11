@@ -24,6 +24,8 @@ async function main() {
   startUrls.forEach(async (startUrl, i) => {
     sitemap.startUrl = startUrl;
     const scraped = await webscraper(sitemap, scrapOptions);
+    // Change this to sort your data in the order you would like
+    // scraped.sort((r1, r2) => r1['command_link'].localeCompare(r2['command_link']));
     // ensure that scraped data is an array
     let cleanedData = !Array.isArray(scraped) ? [scraped] : scraped;
     // trim string values
