@@ -15,6 +15,23 @@ function trim(thing, data_format) {
   return res;
 }
 
+function sorter(sortBy) {
+  return (r1, r2) => {
+    var order = 0;
+    for (var key of sortBy) {
+      key = key.replace(/(^[^\+\-])/, '+$1');
+      const sign = key.charAt(0);
+      key = key.replace(/(^.)/, '');
+      const modifier = Number(sign + '1');
+      if (order != 0) {
+        break;
+      }
+      var order = modifier * r1[key].localeCompare(r2[key]);
+    }
+    return order;
+  };
+}
+
 async function main() {
   const config = await fs.readJSON(process.argv[2]);
   const sitemap = await fs.readJSON(`${__dirname}/${config.site_map}`);
@@ -25,7 +42,10 @@ async function main() {
     sitemap.startUrl = startUrl;
     const scraped = await webscraper(sitemap, scrapOptions);
     // Change this to sort your data in the order you would like
-    // scraped.sort((r1, r2) => r1['command_link'].localeCompare(r2['command_link']));
+    const sortBy = Array.isArray(config.sort_by) ? config.sort_by : [config.sort_by];
+    if (sortBy) {
+      scraped.sort(sorter(sortBy));
+    }
     // ensure that scraped data is an array
     let cleanedData = !Array.isArray(scraped) ? [scraped] : scraped;
     // trim string values
