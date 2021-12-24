@@ -26,7 +26,9 @@ function sorter(sortBy) {
       if (order != 0) {
         break;
       }
-      var order = modifier * r1[key].localeCompare(r2[key]);
+      if (![r1, r2].some(r => r[key] === undefined || r[key] === null)) {
+        var order = modifier * r1[key].localeCompare(r2[key]);
+      }
     }
     return order;
   };
