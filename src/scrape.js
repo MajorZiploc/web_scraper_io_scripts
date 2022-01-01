@@ -23,11 +23,11 @@ function sorter(sortBy) {
       const sign = key.charAt(0);
       key = key.replace(/(^.)/, '');
       const modifier = Number(sign + '1');
-      if (order != 0) {
+      if (order !== 0) {
         break;
       }
       if (![r1, r2].some(r => r[key] === undefined || r[key] === null)) {
-        var order = modifier * r1[key].localeCompare(r2[key]);
+        order = modifier * r1[key].localeCompare(r2[key]);
       }
     }
     return order;
