@@ -46,12 +46,12 @@ async function main() {
     sitemap.startUrl = startUrl;
     const scraped = await webscraper(sitemap, scrapOptions);
     // Change this to sort your data in the order you would like
-    const sortBy = Array.isArray(config.sort_by) ? config.sort_by : [config.sort_by];
-    if (sortBy) {
+    if (config.sort_by) {
+      const sortBy = Array.isArray(config.sort_by) ? config.sort_by : [config.sort_by];
       scraped.sort(sorter(sortBy));
     }
     // ensure that scraped data is an array
-    let cleanedData = !Array.isArray(scraped) ? [scraped] : scraped;
+    let cleanedData = Array.isArray(scraped) ? scraped : [scraped];
     // trim string values
     cleanedData = cleanedData.map(s =>
       jr.fromKeyValArray(jr.toKeyValArray(s).map(kv => ({ key: kv.key, value: trim(kv.value, config.data_format) })))
