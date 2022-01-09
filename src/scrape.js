@@ -15,20 +15,22 @@ function trim(thing, data_format) {
   return res;
 }
 
-function sorter(sortBy) {
+function sorter(sortBys) {
   return (r1, r2) => {
     var order = 0;
-    for (var key of sortBy) {
-      key = key.replace(/(^[^\+\-])/, '+$1');
-      const sign = key.charAt(0);
-      key = key.replace(/(^.)/, '');
-      const modifier = Number(sign + '1');
-      if (order !== 0) {
-        break;
+    for (var sortBy of sortBys) {
+      if (sortBy.constructor.name === 'String') {
+        sortBy = sortBy.replace(/(^[^\+\-])/, '+$1');
+        const sign = sortBy.charAt(0);
+        sortBy = sortBy.replace(/(^.)/, '');
+        const modifier = Number(sign + '1');
+        if (![r1, r2].some(r => r[sortBy] === undefined || r[sortBy] === null)) {
+          order = modifier * r1[sortBy].localeCompare(r2[sortBy]);
+        }
+      } else {
+        order = sortBy(r1, r2);
       }
-      if (![r1, r2].some(r => r[key] === undefined || r[key] === null)) {
-        order = modifier * r1[key].localeCompare(r2[key]);
-      }
+      if (order !== 0) break;
     }
     return order;
   };
