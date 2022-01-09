@@ -1,17 +1,12 @@
 {
   "_id": "github_repos_clone",
-  "startUrl": [
-    "https://github.com/MajorZiploc?tab=repositories"
-  ],
+  "startUrl": ["https://github.com/MajorZiploc?tab=repositories"],
   "selectors": [
     {
       "delay": 0,
       "id": "repo",
       "multiple": true,
-      "parentSelectors": [
-        "_root",
-        "next_page"
-      ],
+      "parentSelectors": ["_root", "next_page"],
       "selector": "li[itemprop='owns']",
       "type": "SelectorElement"
     },
@@ -19,9 +14,7 @@
       "delay": 0,
       "id": "repo_name",
       "multiple": false,
-      "parentSelectors": [
-        "repo"
-      ],
+      "parentSelectors": ["repo"],
       "selector": "a[itemprop='name codeRepository']",
       "type": "SelectorLink"
     },
@@ -33,9 +26,7 @@
       "discardInitialElements": "do-not-discard",
       "id": "code_btn",
       "multiple": false,
-      "parentSelectors": [
-        "repo_name"
-      ],
+      "parentSelectors": ["repo_name"],
       "selector": "tab-container div:nth-of-type(3) div.input-group",
       "type": "SelectorElementClick"
     },
@@ -44,9 +35,7 @@
       "extractAttribute": "value",
       "id": "clone",
       "multiple": false,
-      "parentSelectors": [
-        "code_btn"
-      ],
+      "parentSelectors": ["code_btn"],
       "selector": "input",
       "type": "SelectorElementAttribute"
     },
@@ -54,10 +43,7 @@
       "delay": 0,
       "id": "next_page",
       "multiple": false,
-      "parentSelectors": [
-        "_root",
-        "next_page"
-      ],
+      "parentSelectors": ["_root", "next_page"],
       "selector": "a.btn-outline:contains('Next')",
       "type": "SelectorLink"
     }
