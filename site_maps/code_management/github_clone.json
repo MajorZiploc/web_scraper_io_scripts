@@ -1,43 +1,65 @@
 {
   "_id": "github_repos_clone",
-  "startUrl": ["https://github.com/MajorZiploc?tab=repositories"],
+  "startUrl": [
+    "https://github.com/MajorZiploc?tab=repositories"
+  ],
   "selectors": [
     {
+      "delay": 0,
       "id": "repo",
-      "type": "SelectorElement",
-      "parentSelectors": ["_root"],
-      "selector": "li[itemprop='owns']",
       "multiple": true,
-      "delay": 0
+      "parentSelectors": [
+        "_root",
+        "next_page"
+      ],
+      "selector": "li[itemprop='owns']",
+      "type": "SelectorElement"
     },
     {
+      "delay": 0,
       "id": "repo_name",
-      "type": "SelectorLink",
-      "parentSelectors": ["repo"],
+      "multiple": false,
+      "parentSelectors": [
+        "repo"
+      ],
       "selector": "a[itemprop='name codeRepository']",
-      "multiple": false,
-      "delay": 0
+      "type": "SelectorLink"
     },
     {
-      "id": "code_btn",
-      "type": "SelectorElementClick",
-      "parentSelectors": ["repo_name"],
-      "selector": "tab-container div:nth-of-type(3) div.input-group",
-      "multiple": false,
-      "delay": 2000,
       "clickElementSelector": "summary.btn-primary",
+      "clickElementUniquenessType": "uniqueText",
       "clickType": "clickOnce",
+      "delay": 2000,
       "discardInitialElements": "do-not-discard",
-      "clickElementUniquenessType": "uniqueText"
+      "id": "code_btn",
+      "multiple": false,
+      "parentSelectors": [
+        "repo_name"
+      ],
+      "selector": "tab-container div:nth-of-type(3) div.input-group",
+      "type": "SelectorElementClick"
     },
     {
-      "id": "clone",
-      "type": "SelectorElementAttribute",
-      "parentSelectors": ["code_btn"],
-      "selector": "input",
-      "multiple": false,
+      "delay": 0,
       "extractAttribute": "value",
-      "delay": 0
+      "id": "clone",
+      "multiple": false,
+      "parentSelectors": [
+        "code_btn"
+      ],
+      "selector": "input",
+      "type": "SelectorElementAttribute"
+    },
+    {
+      "delay": 0,
+      "id": "next_page",
+      "multiple": false,
+      "parentSelectors": [
+        "_root",
+        "next_page"
+      ],
+      "selector": "a.btn-outline:contains('Next')",
+      "type": "SelectorLink"
     }
   ]
 }
