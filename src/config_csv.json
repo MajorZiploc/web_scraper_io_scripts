@@ -1,8 +1,8 @@
 {
-  "data_format": "csv",
-  "site_map": "../site_maps/code_management/github_scrap_personal_projects.json",
-  "start_urls": ["https://github.com/MajorZiploc?tab=repositories"],
+  "dataFormat": "csv",
+  "siteMap": "../site_maps/code_management/github_scrap_personal_projects.json",
+  "startUrls": ["https://github.com/MajorZiploc?tab=repositories"],
   "output_file_name_seed": "../output",
-  "sort_by": ["-main_language", "languages"],
-  "parse_options": {}
+  "sortBy": ["-main_language", "languages"],
+  "parseOptions": {}
 }

@@ -4,11 +4,11 @@ const json2csv = require('json2csv');
 const jtu = require('json-test-utility');
 const jr = jtu.jsonRefactor;
 
-function trim(thing, data_format) {
+function trim(thing, dataFormat) {
   var res = thing;
   if (typeof thing === 'string') {
     res = thing.trim().replace(/\s{2,}/g, ' ');
-    if (data_format === 'csv') {
+    if (dataFormat === 'csv') {
       res = res.replace(/,/g, ';');
     }
   }
@@ -38,41 +38,41 @@ function sorter(sortBys) {
 
 async function main() {
   const config = await fs.readJSON(process.argv[2]);
-  const sitemap = await fs.readJSON(`${__dirname}/${config.site_map}`);
+  const sitemap = await fs.readJSON(`${__dirname}/${config.siteMap}`);
   const scrapOptions = { delay: 10, pageLoadDelay: 10, browser: 'headless' }; // optional delay, pageLoadDelay and browser
-  const startUrls = config.start_urls ?? [sitemap.startUrl];
+  const startUrls = config.startUrls ?? [sitemap.startUrl];
 
   startUrls.forEach(async (startUrl, i) => {
     sitemap.startUrl = startUrl;
     const scraped = await webscraper(sitemap, scrapOptions);
     // Change this to sort your data in the order you would like
-    if (config.sort_by) {
-      const sortBy = Array.isArray(config.sort_by) ? config.sort_by : [config.sort_by];
+    if (config.sortBy) {
+      const sortBy = Array.isArray(config.sortBy) ? config.sortBy : [config.sortBy];
       scraped.sort(sorter(sortBy));
     }
     // ensure that scraped data is an array
     let cleanedData = Array.isArray(scraped) ? scraped : [scraped];
     // trim string values
     cleanedData = cleanedData.map(s =>
-      jr.fromKeyValArray(jr.toKeyValArray(s).map(kv => ({ key: kv.key, value: trim(kv.value, config.data_format) })))
+      jr.fromKeyValArray(jr.toKeyValArray(s).map(kv => ({ key: kv.key, value: trim(kv.value, config.dataFormat) })))
     );
 
-    var file_content = '<invalid_data_format>';
-    if (config.data_format === 'json') {
-      file_content = JSON.stringify(cleanedData, null, 2);
+    var fileContent = '<invalid_data_format>';
+    if (config.dataFormat === 'json') {
+      fileContent = JSON.stringify(cleanedData, null, 2);
     }
 
-    if (config.data_format === 'csv') {
+    if (config.dataFormat === 'csv') {
       // quote: '' removes quotes from fields/headers
       // const parserOptions = { quote: '' }
       // OR for no customizations
-      const parserOptions = config.parse_options ?? {};
+      const parserOptions = config.parseOptions ?? {};
       const csv = json2csv.parse(cleanedData, parserOptions);
       // print scraped data in csv format
-      file_content = csv;
+      fileContent = csv;
     }
-    console.log(file_content);
-    fs.writeFile(`${__dirname}/${config.output_file_name_seed}_${i}.${config.data_format}`, file_content);
+    console.log(fileContent);
+    fs.writeFile(`${__dirname}/${config.output_file_name_seed}_${i}.${config.dataFormat}`, fileContent);
   });
 }
 
