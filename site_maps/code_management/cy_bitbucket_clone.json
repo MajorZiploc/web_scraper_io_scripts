@@ -30,7 +30,7 @@
       "id": "clone_btn",
       "type": "SelectorElementClick",
       "parentSelectors": ["repo_name"],
-      "selector": "div[role='dialog']",
+      "selector": "section[role='dialog']",
       "multiple": false,
       "delay": 2000,
       "clickElementSelector": "button span:contains('Clone')",
