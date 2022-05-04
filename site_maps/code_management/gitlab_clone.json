@@ -1,0 +1,58 @@
+{
+  "_id": "gitlab_clone",
+  "startUrl": [
+    "<your_root_url_here>"
+  ],
+  "selectors": [
+    {
+      "id": "repo",
+      "parentSelectors": [
+        "_root",
+        "repo"
+      ],
+      "type": "SelectorElementClick",
+      "clickElementSelector": "a.next-page-item",
+      "clickElementUniquenessType": "uniqueHTML",
+      "clickType": "clickMore",
+      "delay": 2000,
+      "discardInitialElements": "do-not-discard",
+      "multiple": true,
+      "selector": "div.project-row-contents"
+    },
+    {
+      "id": "repo_link",
+      "parentSelectors": [
+        "repo"
+      ],
+      "type": "SelectorLink",
+      "selector": "a[itemprop='name']",
+      "multiple": false,
+      "delay": 0
+    },
+    {
+      "id": "clone_btn",
+      "parentSelectors": [
+        "repo_link"
+      ],
+      "type": "SelectorElementClick",
+      "clickElementSelector": "a.clone-dropdown-btn",
+      "clickElementUniquenessType": "uniqueText",
+      "clickType": "clickOnce",
+      "delay": 2000,
+      "discardInitialElements": "do-not-discard",
+      "multiple": true,
+      "selector": "ul.dropdown-menu-large"
+    },
+    {
+      "id": "clone",
+      "parentSelectors": [
+        "clone_btn"
+      ],
+      "type": "SelectorElementAttribute",
+      "selector": "input[name=\"ssh_project_clone\"]",
+      "multiple": false,
+      "delay": 0,
+      "extractAttribute": "value"
+    }
+  ]
+}
