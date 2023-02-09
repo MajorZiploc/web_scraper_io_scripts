@@ -40,7 +40,7 @@ async function main() {
   const config = await fs.readJSON(process.argv[2]);
   const sitemap = await fs.readJSON(`${__dirname}/${config.siteMap}`);
   const scrapOptions = { delay: 10, pageLoadDelay: 10, browser: 'headless' }; // optional delay, pageLoadDelay and browser
-  const startUrls = config.startUrls ?? [sitemap.startUrl];
+  const startUrls = config.startUrls?.length > 0 ? config.startUrls : sitemap.startUrl;
 
   startUrls.forEach(async (startUrl, i) => {
     sitemap.startUrl = startUrl;
