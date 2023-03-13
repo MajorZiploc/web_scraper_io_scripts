@@ -1,7 +1,7 @@
 {
   "dataFormat": "json",
-  "siteMap": "../site_maps/code_management/github_scrap_personal_projects.json",
-  "startUrls": ["https://github.com/MajorZiploc?tab=repositories"],
-  "output_file_name_seed": "../output",
-  "sortBy": ["-main_language", "languages", "web-scraper-order"]
+  "siteMap": "../site_maps/manga/mangaowl_favorites.json",
+  "startUrls": [],
+  "output_file_name_seed": "../mangaowl_favorites",
+  "sortBy": ["web-scraper-order"]
 }
