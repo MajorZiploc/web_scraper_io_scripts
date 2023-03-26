@@ -1,0 +1,61 @@
+{
+  "_id": "github_repo_forks_clone",
+  "startUrl": [
+    "https://github.com/PolyMarsDev/Flappuccino/forks"
+  ],
+  "selectors": [
+    {
+      "id": "repo",
+      "multiple": true,
+      "parentSelectors": [
+        "_root",
+        "next_page"
+      ],
+      "selector": ".Box-row",
+      "type": "SelectorElement"
+    },
+    {
+      "id": "repo_name",
+      "multiple": false,
+      "parentSelectors": [
+        "repo"
+      ],
+      "selector": "a.f4",
+      "type": "SelectorLink"
+    },
+    {
+      "clickElementSelector": "get-repo",
+      "clickElementUniquenessType": "uniqueText",
+      "clickType": "clickOnce",
+      "delay": 2000,
+      "discardInitialElements": "do-not-discard",
+      "id": "code_btn",
+      "multiple": false,
+      "parentSelectors": [
+        "repo_name"
+      ],
+      "selector": ".Box-row div:nth-of-type(2) div.input-group",
+      "type": "SelectorElementClick"
+    },
+    {
+      "extractAttribute": "value",
+      "id": "clone",
+      "multiple": false,
+      "parentSelectors": [
+        "code_btn"
+      ],
+      "selector": "input",
+      "type": "SelectorElementAttribute"
+    },
+    {
+      "id": "next_page",
+      "multiple": false,
+      "parentSelectors": [
+        "_root",
+        "next_page"
+      ],
+      "selector": ".next_page",
+      "type": "SelectorLink"
+    }
+  ]
+}
