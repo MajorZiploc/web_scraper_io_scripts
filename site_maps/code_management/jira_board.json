@@ -1,0 +1,66 @@
+{
+  "_id": "jira_board",
+  "startUrl": [
+    "https://www.atlassian.net/jira/software/projects/PATH/boards/7"
+  ],
+  "selectors": [
+    {
+      "id": "card",
+      "parentSelectors": [
+        "_root"
+      ],
+      "type": "SelectorElement",
+      "selector": ".ghx-issue",
+      "multiple": true
+    },
+    {
+      "id": "card_link",
+      "parentSelectors": [
+        "card"
+      ],
+      "type": "SelectorLink",
+      "selector": "a",
+      "multiple": false
+    },
+    {
+      "id": "qa_assignee",
+      "parentSelectors": [
+        "card_link"
+      ],
+      "type": "SelectorText",
+      "selector": "div[data-testid*='issue-field-heading-styled-field-heading']:has(h2:contains('QA Assignee')) + div",
+      "multiple": false,
+      "regex": ""
+    },
+    {
+      "id": "status",
+      "parentSelectors": [
+        "card_link"
+      ],
+      "type": "SelectorText",
+      "selector": "div[data-testid=\"issue.views.issue-base.foundation.status.status-field-wrapper\"]",
+      "multiple": false,
+      "regex": ""
+    },
+    {
+      "id": "Assignee",
+      "parentSelectors": [
+        "card_link"
+      ],
+      "type": "SelectorText",
+      "selector": "div[data-testid*='issue-field-heading-styled-field-heading']:has(h2:contains('Assignee')):nth(0) + div",
+      "multiple": false,
+      "regex": ""
+    },
+    {
+      "id": "Reporter",
+      "parentSelectors": [
+        "card_link"
+      ],
+      "type": "SelectorText",
+      "selector": "div[data-testid*='issue-field-heading-styled-field-heading']:has(h2:contains('Reporter')) + div",
+      "multiple": false,
+      "regex": ""
+    }
+  ]
+}
