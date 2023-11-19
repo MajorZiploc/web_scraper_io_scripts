@@ -1,0 +1,117 @@
+{
+  "_id": "codewars_compeleted_kata",
+  "startUrl": [
+    "https://www.codewars.com/users/Major_Ziploc/completed"
+  ],
+  "selectors": [
+    {
+      "delay": 2000,
+      "elementLimit": 500,
+      "id": "card",
+      "multiple": true,
+      "parentSelectors": [
+        "_root"
+      ],
+      "selector": "div.list-item-kata div.flex",
+      "type": "SelectorElementScroll"
+    },
+    {
+      "id": "title",
+      "multiple": false,
+      "parentSelectors": [
+        "card"
+      ],
+      "regex": "",
+      "selector": "div.item-title a",
+      "type": "SelectorText"
+    },
+    {
+      "id": "kya_value",
+      "multiple": false,
+      "parentSelectors": [
+        "card"
+      ],
+      "regex": "",
+      "selector": ".inner-small-hex span",
+      "type": "SelectorText"
+    },
+    {
+      "id": "problem_link",
+      "linkType": "linkFromHref",
+      "multiple": false,
+      "parentSelectors": [
+        "card"
+      ],
+      "selector": ".pl-0 a",
+      "type": "SelectorLink"
+    },
+    {
+      "extractAttribute": "data-language",
+      "id": "available_languages",
+      "parentSelectors": [
+        "card"
+      ],
+      "selector": "a[data-language]",
+      "type": "SelectorGroup"
+    },
+    {
+      "extractAttribute": "class",
+      "id": "completed_languages",
+      "parentSelectors": [
+        "card"
+      ],
+      "selector": ".language-summary i",
+      "type": "SelectorGroup"
+    },
+    {
+      "id": "star_count",
+      "multiple": false,
+      "parentSelectors": [
+        "card"
+      ],
+      "regex": "",
+      "selector": ".js-add-code-challenge-star span",
+      "type": "SelectorText"
+    },
+    {
+      "id": "part_of_a_collection_count",
+      "multiple": false,
+      "parentSelectors": [
+        "card"
+      ],
+      "regex": "",
+      "selector": ".js-add-to-collection span",
+      "type": "SelectorText"
+    },
+    {
+      "id": "satisfactoin_rating",
+      "multiple": false,
+      "parentSelectors": [
+        "card"
+      ],
+      "regex": "",
+      "selector": "span[data-tippy-content*='Satisfaction Rating:']",
+      "type": "SelectorText"
+    },
+    {
+      "id": "completed_count",
+      "multiple": false,
+      "parentSelectors": [
+        "card"
+      ],
+      "regex": "",
+      "selector": "span[data-tippy-content='Total times this kata has been completed']",
+      "type": "SelectorText"
+    },
+    {
+      "id": "author",
+      "multiple": false,
+      "parentSelectors": [
+        "card"
+      ],
+      "regex": "",
+      "selector": "a[data-tippy-content=\"This kata's Sensei\"]",
+      "type": "SelectorText"
+    }
+  ]
+}
