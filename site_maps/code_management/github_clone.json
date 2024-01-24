@@ -1,51 +1,77 @@
 {
   "_id": "github_repos_clone",
-  "startUrl": ["https://github.com/MajorZiploc?tab=repositories"],
+  "startUrl": [
+    "https://github.com/MajorZiploc?tab=repositories"
+  ],
   "selectors": [
     {
-      "delay": 0,
       "id": "repo",
       "multiple": true,
-      "parentSelectors": ["_root", "next_page"],
+      "parentSelectors": [
+        "_root",
+        "next_page"
+      ],
       "selector": "li[itemprop='owns']",
       "type": "SelectorElement"
     },
     {
-      "delay": 0,
       "id": "repo_name",
       "multiple": false,
-      "parentSelectors": ["repo"],
+      "parentSelectors": [
+        "repo"
+      ],
       "selector": "a[itemprop='name codeRepository']",
       "type": "SelectorLink"
     },
     {
-      "clickElementSelector": "summary.btn-primary",
+      "clickElementSelector": "button:contains('Code')",
       "clickElementUniquenessType": "uniqueText",
       "clickType": "clickOnce",
       "delay": 2000,
       "discardInitialElements": "do-not-discard",
       "id": "code_btn",
       "multiple": false,
-      "parentSelectors": ["repo_name"],
-      "selector": "tab-container div:nth-of-type(3) div.input-group",
+      "parentSelectors": [
+        "repo_name"
+      ],
+      "selector": "div > ul[class*=\"ListBox\"]:first",
       "type": "SelectorElementClick"
     },
     {
-      "delay": 0,
+      "id": "next_page",
+      "linkType": "linkFromHref",
+      "multiple": false,
+      "parentSelectors": [
+        "_root",
+        "next_page"
+      ],
+      "selector": "a:contains('Next')",
+      "type": "SelectorLink"
+    },
+    {
+      "clickActionType": "real",
+      "clickElementSelector": "span:contains(\"Local\"):first",
+      "clickElementUniquenessType": "uniqueText",
+      "clickType": "clickOnce",
+      "delay": 2000,
+      "discardInitialElements": "do-not-discard",
+      "id": "local_tab",
+      "multiple": true,
+      "parentSelectors": [
+        "code_btn"
+      ],
+      "selector": "div:has(>input)",
+      "type": "SelectorElementClick"
+    },
+    {
       "extractAttribute": "value",
       "id": "clone",
       "multiple": false,
-      "parentSelectors": ["code_btn"],
+      "parentSelectors": [
+        "local_tab"
+      ],
       "selector": "input",
       "type": "SelectorElementAttribute"
-    },
-    {
-      "delay": 0,
-      "id": "next_page",
-      "multiple": false,
-      "parentSelectors": ["_root", "next_page"],
-      "selector": "a.btn-outline:contains('Next')",
-      "type": "SelectorLink"
     }
   ]
 }
