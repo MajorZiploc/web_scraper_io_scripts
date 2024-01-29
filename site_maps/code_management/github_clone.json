@@ -11,7 +11,7 @@
         "_root",
         "next_page"
       ],
-      "selector": "li[itemprop='owns']",
+      "selector": "li.Box-row",
       "type": "SelectorElement"
     },
     {
@@ -24,7 +24,7 @@
       "type": "SelectorLink"
     },
     {
-      "clickElementSelector": "button:contains('Code')",
+      "clickElementSelector": "button span:contains('Code'):first",
       "clickElementUniquenessType": "uniqueText",
       "clickType": "clickOnce",
       "delay": 2000,
@@ -60,6 +60,21 @@
       "parentSelectors": [
         "code_btn"
       ],
+      "selector": "div:has(>nav:contains('SSH'))",
+      "type": "SelectorElementClick"
+    },
+    {
+      "clickActionType": "real",
+      "clickElementSelector": "span:contains('SSH'):first",
+      "clickElementUniquenessType": "uniqueText",
+      "clickType": "clickOnce",
+      "delay": 2000,
+      "discardInitialElements": "do-not-discard",
+      "id": "ssh_tab",
+      "multiple": true,
+      "parentSelectors": [
+        "local_tab"
+      ],
       "selector": "div:has(>input)",
       "type": "SelectorElementClick"
     },
@@ -68,7 +83,7 @@
       "id": "clone",
       "multiple": false,
       "parentSelectors": [
-        "local_tab"
+        "ssh_tab"
       ],
       "selector": "input",
       "type": "SelectorElementAttribute"
