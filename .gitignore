@@ -6,3 +6,5 @@ src/sitemap.json
 tags
 
 Session.vim
+
+cscope.out
