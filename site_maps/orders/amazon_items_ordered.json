@@ -1,0 +1,68 @@
+{
+  "_id": "amazon_items_ordered",
+  "startUrl": [
+    "https://www.amazon.com/gp/css/order-history?ref_=nav_orders_first"
+  ],
+  "selectors": [
+    {
+      "id": "card",
+      "parentSelectors": [
+        "_root",
+        "next"
+      ],
+      "type": "SelectorElement",
+      "selector": "div.order-card",
+      "multiple": true
+    },
+    {
+      "id": "next",
+      "parentSelectors": [
+        "_root",
+        "next"
+      ],
+      "type": "SelectorLink",
+      "selector": "a:contains('Next'):first",
+      "multiple": true,
+      "linkType": "linkFromHref"
+    },
+    {
+      "id": "item",
+      "parentSelectors": [
+        "card"
+      ],
+      "type": "SelectorGroup",
+      "selector": "div.yohtmlc-product-title, div.yohtmlc-item",
+      "extractAttribute": ""
+    },
+    {
+      "id": "cost",
+      "parentSelectors": [
+        "card"
+      ],
+      "type": "SelectorText",
+      "selector": "div.a-span2:contains('Total')",
+      "multiple": false,
+      "regex": ""
+    },
+    {
+      "id": "order_date",
+      "parentSelectors": [
+        "card"
+      ],
+      "type": "SelectorText",
+      "selector": "div.a-span3:contains('Order placed')",
+      "multiple": false,
+      "regex": ""
+    },
+    {
+      "id": "order_id",
+      "parentSelectors": [
+        "card"
+      ],
+      "type": "SelectorText",
+      "selector": "div.yohtmlc-order-id",
+      "multiple": false,
+      "regex": ""
+    }
+  ]
+}
